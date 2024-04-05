@@ -1,6 +1,7 @@
 .cache
 build/
 .vscode/
+vcpkg_installed/
 compile_commands.json
 
 # Prerequisites

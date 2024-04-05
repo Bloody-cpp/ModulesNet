@@ -10,3 +10,11 @@ add_executable(${PROJECT_NAME} ${INC_FILES} ${SRC_FILES})
 
 include_directories(../lang/include)
 include_directories(include)
+
+find_package(Boost REQUIRED)
+if (Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+    link_directories(${Boost_LIBRARY_DIRS})
+endif ()
+
+target_link_libraries(compiler PUBLIC ${Boost_LIBRARIES})
