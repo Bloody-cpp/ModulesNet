@@ -1,46 +1,38 @@
 #include <argsParser.h>
+#include <corecrt_terminate.h>
 #include <iostream>
+#include <boost/program_options.hpp>
 
 using namespace std;
 
 namespace BNet
 {
-    ArgsParser::ArgsParser(int argc, char** argv) noexcept {
-        m_argc = argc;
-        m_argv = argv;
-        parse();
-    }
-    void ArgsParser::parseArgument(const std::string arg) noexcept {
-        //Foreach without path to .exe
-        for (size_t x = 0; x < m_argc; x++) {
-            std::string curArg = m_argv[x]; // char* -> string
-            auto findResult = curArg.find(arg);
-            if (findResult != string::npos) {
-                cout << "found instance" << endl;
-                string value = arg.substr(findResult + arg.size());
-                if (value.find('"') != string::npos) {
-                    value = value.substr(value.find('"') + 1, value.find('"', 1) - 1); // "value" -> value
-                }
-                m_keys[arg] = value;
-            }
+    ArgsParser::ArgsParser(int argc, char** argv) noexcept
+        : m_desc("Allowed options") {
+        m_desc.add_options()
+        ("help", "produce help message")
+        ("cmake", po::value<string>(&m_cmakePath)->default_value("base/cmake/bin/cmake.exe"), "set path to cmake.exe")
+        ("cmakeLists", po::value<string>(&m_cmakeListsPath), "path to CMakeLists.txt")
+        ("cmakeArgs", po::value<vector<string>>(&m_cmakeArgs)->multitoken(), "arguments to cmake");
+        po::store(po::parse_command_line(argc, argv, m_desc), m_vm);
+        po::notify(m_vm);
+
+        if (m_vm.count("help")) {
+            cout << m_desc << endl;
+            std::exit(0);
+        }
+        if (!m_vm.count("cmakeLists")) {
+            cout << "cmakeLists is not set" << endl;
+            exit(0);
         }
     }
-    void ArgsParser::parse() noexcept {
-        bool wasProblem = false;
-        for (auto x : m_keys) {
-            parseArgument(x.first);
-            if (m_keys[x.second].empty()) {
-                cout << "missed \"" << x.first << "\"" << endl;
-                wasProblem = true;
-            }
-        }
-        if (wasProblem)
-            exit(-1);
+    vector<string> ArgsParser::getCMakeArgs() noexcept {
+        return m_cmakeArgs;
     }
-    string ArgsParser::getCMakePath() noexcept {
-        return m_keys["-cmake"];
+    string ArgsParser::getCMakePath() noexcept { 
+        return m_cmakePath;
     }
     string ArgsParser::getCMakeListsPath() noexcept {
-        return m_keys["-cmakeLists"];
+        return m_cmakeListsPath;
     }
 }
