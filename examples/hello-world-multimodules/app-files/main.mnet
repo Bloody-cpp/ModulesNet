@@ -1,0 +1,9 @@
+#application
+require <HelloWorldPrinter>
+require <ConsolePrinter
+
+int main() noexcept {
+    ConsolePrinter-print("Application was start");
+    HelloWorldPrinter-printHelloWorld();
+    return 0;
+}

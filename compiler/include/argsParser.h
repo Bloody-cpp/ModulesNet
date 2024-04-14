@@ -13,6 +13,8 @@ namespace BNet
     {
         std::string m_cmakePath;
         std::string m_cmakeListsPath;
+        std::vector<std::string> m_filesPaths;
+        std::vector<std::string> m_modulesPaths;
         std::vector<std::string> m_cmakeArgs;
 
         po::options_description m_desc;
@@ -24,6 +26,8 @@ namespace BNet
         std::vector<std::string> getCMakeArgs() noexcept;
         std::string getCMakePath() noexcept;
         std::string getCMakeListsPath() noexcept;
+        std::vector<std::string> getModulesPath() noexcept;
+        std::vector<std::string> getFilesPaths() noexcept;
     };
 }
 

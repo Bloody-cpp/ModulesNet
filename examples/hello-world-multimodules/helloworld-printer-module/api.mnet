@@ -1,0 +1,6 @@
+require <ConsolePrinter>
+
+@public
+void printHelloWorld() noexcept {
+    ConsolePrinter-print("Hello World!");
+}

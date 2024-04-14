@@ -7,8 +7,7 @@ int main(int argc, char **argv)
 {
     BNet::ArgsParser argsParser(argc, argv);
     cout << argsParser.getCMakePath() << endl;
-    cout << argsParser.getCMakeListsPath() << endl;\
-    auto args = argsParser.getCMakeArgs();
+    auto args = argsParser.getFilesPaths();
     for (auto arg : args) {
         cout << arg << endl;
     }

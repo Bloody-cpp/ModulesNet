@@ -1,0 +1,7 @@
+#include <iostream>
+#include <string>
+
+@public
+void print(std::string str) noexcept {
+    std::cout << str << std::endl;
+}

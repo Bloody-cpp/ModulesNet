@@ -1,0 +1,4 @@
+#module mygame_api
+
+@external
+void walkPlayer(int, int) noexcept;

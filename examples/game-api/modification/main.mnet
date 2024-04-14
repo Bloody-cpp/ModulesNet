@@ -1,0 +1,8 @@
+#module Modification
+require <mygame_api>
+
+@event
+int initialize() noexcept {
+    mygame_api-walkPlayer(100, 200);
+    return 0;
+}
