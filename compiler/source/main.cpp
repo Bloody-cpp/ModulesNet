@@ -5,7 +5,7 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    BNet::ArgsParser argsParser(argc, argv);
+    mnet::ArgsParser argsParser(argc, argv);
     cout << argsParser.getCMakePath() << endl;
     auto args = argsParser.getFilesPaths();
     for (auto arg : args) {

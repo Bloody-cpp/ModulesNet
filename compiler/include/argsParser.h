@@ -7,7 +7,7 @@
 
 namespace po = boost::program_options;
 
-namespace BNet
+namespace mnet
 {
     class ArgsParser
     {
@@ -17,10 +17,13 @@ namespace BNet
         std::vector<std::string> m_modulesPaths;
         std::vector<std::string> m_cmakeArgs;
 
+        void handleCommands() noexcept;
+        void handleFiles();
+
         po::options_description m_desc;
         po::variables_map m_vm;
     public:
-        ArgsParser(int argc, char** argv) noexcept;
+        ArgsParser(int argc, char** argv);
         ~ArgsParser() noexcept = default;
 
         std::vector<std::string> getCMakeArgs() noexcept;

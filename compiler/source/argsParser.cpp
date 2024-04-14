@@ -2,12 +2,14 @@
 #include <iostream>
 #include <boost/program_options.hpp>
 #include <exception>
+#include <filesValidator.h>
+#include <stdexcept>
 
 using namespace std;
 
-namespace BNet
+namespace mnet
 {
-    ArgsParser::ArgsParser(int argc, char** argv) noexcept
+    ArgsParser::ArgsParser(int argc, char** argv)
         : m_desc("Allowed options") {
         m_desc.add_options()
         ("help,h", "produce help message")
@@ -16,19 +18,38 @@ namespace BNet
         ("cmakeArgs,a", po::value<vector<string>>(&m_cmakeArgs)->multitoken(), "Arguments to cmake")
         ("mnetFiles,f", po::value<vector<string>>(&m_filesPaths)->multitoken(), "Files to compile")
         ("modules,m", po::value<vector<string>>(&m_modulesPaths)->multitoken(), "Path to modules which be link");
+
         try {
             po::store(po::parse_command_line(argc, argv, m_desc), m_vm);
             po::notify(m_vm);
         }
         catch(exception& exp) {
-            std::cout << exp.what() << std::endl;
+            cout << exp.what() << endl;
             exit(0);
         }
-        
+        handleCommands();
+        handleFiles();
+    }
+    void ArgsParser::handleFiles() {
+        bool wasProblem = false;
+        if (!validate(m_filesPaths, "--mnetFiles"))
+            wasProblem = true;
 
+        if (!validate(m_modulesPaths, "--modules"))
+            wasProblem = true;
+
+        if (!compareFilename(m_cmakeListsPath, "CMakeLists.txt") || !validate(m_cmakeListsPath)) {
+            cout << "[--cmakeLists] " + m_cmakeListsPath + " is not exists" << endl;
+            wasProblem = true;
+        }
+
+        if (wasProblem)
+             throw runtime_error("incorrect path");
+    }
+    void ArgsParser::handleCommands() noexcept {
         if (m_vm.count("help")) {
             cout << m_desc << endl;
-            std::exit(0);
+            exit(0);
         }
         bool wasProblem = false;
         if (!m_vm.count("cmakeLists")) {
