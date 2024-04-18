@@ -12,6 +12,7 @@ namespace mnet {
         ~Cleaner() noexcept = default;
 
         void proccess(std::string& code) noexcept;
+        std::string makeRemoveLiterals(std::string& code) noexcept;
     };
 }
 

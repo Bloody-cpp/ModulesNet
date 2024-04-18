@@ -1,7 +1,7 @@
-#module HelloWorldPrinter
-require <ConsolePrinter>
+@module HelloWorldPrinter
+@require <ConsolePrinter>
 
-@event
+@global-event
 int initialize() noexcept {
     ConsolePrinter-print("HelloWorldPrinter was initialize);
     return 0;

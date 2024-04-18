@@ -5,6 +5,7 @@
 #include <fstream>
 #include <exception>
 #include <sstream>
+#include <include.h>
 
 namespace mnet {
     class File {
@@ -15,6 +16,7 @@ namespace mnet {
         File(const std::string path);
         ~File() noexcept;
 
+        file_t convert();
         void openFile(std::string path);
         std::string get();
     };

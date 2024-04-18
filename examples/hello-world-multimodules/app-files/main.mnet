@@ -1,6 +1,6 @@
-#application
-require <HelloWorldPrinter>
-require <ConsolePrinter
+@application
+@require <HelloWorldPrinter>
+@require <ConsolePrinter
 
 int main() noexcept {
     ConsolePrinter-print("Application was start");

@@ -1,5 +1,5 @@
-#ifndef COMPILER_INCLUDE_FILESVALIDATOR
-#define COMPILER_INCLUDE_FILESVALIDATOR
+#ifndef COMPILER_INCLUDE_FILESMANAGER
+#define COMPILER_INCLUDE_FILESMANAGER
 
 #include <string>
 #include <vector>
@@ -13,6 +13,8 @@ namespace mnet {
     
     bool compareExtension(fs::path path, std::string extension) noexcept;
     bool compareFilename(fs::path path, std::string filename) noexcept;
+
+    std::string getFileName(fs::path path) noexcept;
 }
 
-#endif /* COMPILER_INCLUDE_FILESVALIDATOR */
+#endif /* COMPILER_INCLUDE_FILESMANAGER */

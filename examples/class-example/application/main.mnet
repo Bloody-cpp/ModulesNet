@@ -1,0 +1,9 @@
+@application
+@require <calculator>
+#include <iostream>
+
+int main() {
+    calculator-Calculator calculator;
+    std::cout << calculator.calculate(10, 20) << std::endl;
+    return 0;
+}

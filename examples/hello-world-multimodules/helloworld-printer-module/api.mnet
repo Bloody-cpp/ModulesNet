@@ -1,4 +1,4 @@
-require <ConsolePrinter>
+@require <ConsolePrinter>
 
 @public
 void printHelloWorld() noexcept {

@@ -1,13 +1,13 @@
-#module ConsolePrinter
+@module ConsolePrinter
 #include <iostream>
 
-@event
+@global-event
 int initialize() noexcept {
     std::cout << "ConsolePrinter was initialize" << std::endl;
     return 0;
 }
 
-@event
+@global-event
 int close() noexcept {
     std::cout << "ConsolePrinter was close" << std::endl;
     return 0;

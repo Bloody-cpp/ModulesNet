@@ -2,7 +2,7 @@
 #include <iostream>
 #include <boost/program_options.hpp>
 #include <exception>
-#include <filesValidator.h>
+#include <filesManager.h>
 #include <stdexcept>
 
 using namespace std;

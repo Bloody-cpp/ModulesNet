@@ -5,6 +5,19 @@
 using namespace std;
 using namespace mnet;
 
+string Cleaner::makeRemoveLiterals(std::string& code) noexcept {
+    string instance = code;
+    size_t begin = instance.find('\"');
+    size_t end = instance.find("\"", 1);
+    if (begin != string::npos) {
+        if (end != string::npos) {
+            instance.erase(begin, end - begin + 2);
+            makeRemoveLiterals(instance);
+        }
+    }
+    return std::move(instance);
+}
+
 void Cleaner::deleteSingleComment(string& code) noexcept {
     vector<string> lines;
     boost::split(lines, code, boost::is_any_of("\n"));

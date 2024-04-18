@@ -1,4 +1,4 @@
-#include <filesValidator.h>
+#include <filesManager.h>
 #include <iostream>
 
 using namespace mnet::fs;
@@ -23,5 +23,8 @@ namespace mnet {
     }
     bool compareFilename(path path, string filename) noexcept {
         return path.filename() == filename;
+    }
+    string getFileName(path path) noexcept {
+        return path.filename().u8string();
     }
 }
