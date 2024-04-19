@@ -1,4 +1,5 @@
 #include "../include/filesManager.h"
+#include "../lang/include/debuggerSingleton.h"
 #include <iostream>
 
 using namespace mnet::fs;
@@ -8,15 +9,12 @@ namespace mnet {
     bool validate(const string path) noexcept {
         return exists(path);
     }
-    bool validate(const vector<string> paths, string handle) noexcept {
-        bool state = true;
+    void validate(const vector<string> paths, string handle) noexcept {
         for (auto path : paths) {
             if (!exists(path)) {
-                cout << "[" + handle + "] " + path + " is not exists" << endl;
-                state = false;
+                DebuggerSingleton::echo("is not exists", error, handle, path);
             }
         }
-        return state;
     }
     bool compareExtension(path path, string extension) noexcept {
         return path.extension() == extension;

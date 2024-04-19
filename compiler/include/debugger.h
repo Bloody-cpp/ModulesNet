@@ -16,10 +16,29 @@ namespace mnet {
                 std::cout << "[WARNING] " << info.m_file->m_path << " " << msg << std::endl;
                 break;
             case mnet::MsgType::error:
-                std::cout << "[ERROR] " << info.m_file->m_path << " " << info.m_component << " " << msg << std::endl;
+                std::cout << "[ERROR] " << info.m_file->m_path << " <" << info.m_component << "> " << msg << std::endl;
                 exit(100);
                 break;
             }
+        }
+        void stEcho(
+            MsgType type, 
+            std::string msg, 
+            std::string component, 
+            std::string filePath
+        ) override {
+            switch (type) {
+            case mnet::MsgType::info:
+                std::cout << "[INFO] " << filePath << " " << msg << std::endl;
+                break;
+            case mnet::MsgType::warning:
+                std::cout << "[WARNING] " << filePath << " " << msg << std::endl;
+                break;
+            case mnet::MsgType::error:
+                std::cout << "[ERROR] " << filePath << " <" << component << "> " << msg << std::endl;
+                exit(100);
+                break;
+        }
         }
     };
 }

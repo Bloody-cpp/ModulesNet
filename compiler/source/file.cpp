@@ -2,6 +2,7 @@
 #include <filesystem>
 #include <stdexcept>
 #include "../include/filesManager.h"
+#include "../lang/include/debuggerSingleton.h"
 
 using namespace mnet;
 using namespace std;
@@ -13,17 +14,17 @@ File::File(const string path) {
 void File::openFile(const string path) {
     m_file.open(path);
     if (m_file.fail())
-        throw runtime_error("Cannot open file " + path);
+        DebuggerSingleton::echo("Can`t open file", error, "File", path);
 }
 string File::get() {
     if (!m_file.is_open())
-        throw runtime_error("File don`t open " + m_path);
+        DebuggerSingleton::echo("File don`t open", error, "File", m_path);
     return string((std::istreambuf_iterator<char>(m_file)),
                   (std::istreambuf_iterator<char>()));
 }
 file_t File::convert() {
     if (!m_file.is_open())
-        throw runtime_error("File don`t open" + m_path);
+        DebuggerSingleton::echo("File don`t open", error, "File", m_path);
     file_t instance;
     instance.m_path = m_path;
     instance.m_code = get();

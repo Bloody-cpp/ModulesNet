@@ -16,15 +16,15 @@ namespace mnet {
         error = 2
     };
     
-    struct ThrowInfo {
-        DebugInfo info;
-        MsgType type;
-        std::string msg;
-    };
-    
     class IDebugger {
     public:
         virtual void echo(MsgType type, std::string msg, DebugInfo info) = 0;
+        virtual void stEcho(
+            MsgType type, 
+            std::string msg, 
+            std::string component, 
+            std::string filePath
+        ) = 0; // st - static echo
     };
 
     class DebuggerSingleton {
@@ -32,6 +32,12 @@ namespace mnet {
         inline static IDebugger* m_debugger = nullptr;
     public:
         static void initializeDebugger(IDebugger* debugger) noexcept;
+        static void echo(
+            std::string msg,
+            MsgType type,
+            std::string component, 
+            std::string filePath
+        ) noexcept;
     protected:
         void setDebugInfo(const DebugInfo info) noexcept;
         void echo(std::string msg, MsgType type = info) noexcept;

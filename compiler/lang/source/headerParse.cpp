@@ -34,7 +34,7 @@ void HeaderFabric::parseTargetHeader(std::string& code, FileStructure& header) {
         return;
     }
 
-    moduleIndex += string("#module").size();
+    moduleIndex += string(moduleLiteral).size();
     for (size_t x = moduleIndex; x < instance.size(); x++) {
         if (instance[x] == '\n')
             break;

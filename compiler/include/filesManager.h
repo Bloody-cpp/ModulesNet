@@ -8,7 +8,7 @@
 namespace mnet {
     namespace fs = std::filesystem;
 
-    bool validate(const std::vector<std::string> paths, std::string handle) noexcept;
+    void validate(const std::vector<std::string> paths, std::string handle) noexcept;
     bool validate(const std::string path) noexcept;
     
     bool compareExtension(fs::path path, std::string extension) noexcept;
