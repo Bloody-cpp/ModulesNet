@@ -4,21 +4,22 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
-#include <cleaner.h>
-#include <include.h>
+#include "cleaner.h"
+#include "include.h"
+#include "debuggerSingleton.h"
 
 namespace mnet {
-    class HeaderFabric {
+    class HeaderFabric : public DebuggerSingleton {
         Cleaner& m_cleaner;
 
-        void parseTargetHeader(std::string& code, file_t file, Header& header);
-        void parseRequires(std::string& code, file_t file, Header& header);
-        void parseIncludes(std::string& code, file_t file, Header& header);
+        void parseTargetHeader(std::string& code, FileStructure& structure);
+        void parseRequires(std::string& code, FileStructure& structure);
+        void parseIncludes(std::string& code, FileStructure& structure);
     public:
         HeaderFabric(Cleaner& cleaner) noexcept;
         ~HeaderFabric() noexcept = default;
 
-        Header parseFrom(std::string& code, file_t file);
+        void apply(FileStructure& structure);
     };
 }
 

@@ -1,24 +1,28 @@
 #include <iostream>
-#include <argsParser.h>
 #include <file.h>
-#include <cleaner.h>
-#include <headerParse.h>
+#include "../include/argsParser.h"
+#include "../lang/include/langParser.h"
+#include "debuggerSingleton.h"
+#include "debugger.h"
+#include "include.h"
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
+    mnet::CompilerDebugger debugger;
+    mnet::DebuggerSingleton::initializeDebugger(&debugger);
+
     mnet::ArgsParser argsParser(argc, argv);
-    mnet::Cleaner cleaner;
-    mnet::HeaderFabric header(cleaner);
+    mnet::LangParser parser;
     auto filesPath = argsParser.getFilesPaths();
+
+    vector<mnet::FileStructure> structures;
     for (auto path : filesPath) {
         mnet::File file(path);
-
-        auto buffer = file.get();
-        cleaner.proccess(buffer);
-        auto insHeader = header.parseFrom(buffer, file.convert());
-        cout << insHeader.m_targetName << endl;
+        mnet::FileStructure structure = parser.parse(file.convert());
+        cout << structure.m_targetName << endl;
+        structures.push_back(std::move(structure));
     }
     return 0;
 }

@@ -1,9 +1,8 @@
-#include <argsParser.h>
+#include "../include/argsParser.h"
+#include "../include/filesManager.h"
 #include <iostream>
 #include <boost/program_options.hpp>
 #include <exception>
-#include <filesManager.h>
-#include <stdexcept>
 
 using namespace std;
 

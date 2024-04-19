@@ -3,16 +3,18 @@
 
 #include <vector>
 #include <string>
+#include "cleaner.h"
+#include "lineParser.h"
+#include "include.h"
 
 namespace mnet
 {
     class LangParser {
-
+        Cleaner m_cleaner;
+        LineParser m_lineParser;
     public:
-        LangParser() noexcept = default;
-        ~LangParser() noexcept = default;
-
-        void parse(const std::string& code) noexcept {}
+        LangParser() noexcept;
+        FileStructure parse(file_t file) noexcept;
     };
 }
 
