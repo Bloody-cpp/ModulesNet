@@ -6,17 +6,30 @@
 
 namespace mnet {
     class CompilerDebugger : public IDebugger {
+        void positionPrint(int line, int index) {
+            if (line) {
+                std::cout << " " << line;
+                if (index)
+                    std::cout << " " << index << " ";
+            }
+        }
     public:
-        void echo(MsgType type, std::string msg, DebugInfo info) override {
+        void echo(MsgType type, std::string msg, DebugInfo info, int line, int index) override {
             switch (type) {
             case mnet::MsgType::info:
-                std::cout << "[INFO] " << info.m_file->m_path << " " << msg << std::endl;
+                std::cout << "[INFO] " << info.m_file->m_path;
+                positionPrint(line, index);
+                std::cout << " " << msg << std::endl;
                 break;
             case mnet::MsgType::warning:
-                std::cout << "[WARNING] " << info.m_file->m_path << " " << msg << std::endl;
+                std::cout << "[WARNING] " << info.m_file->m_path;
+                positionPrint(line, index);
+                std::cout << " " << msg << std::endl;
                 break;
             case mnet::MsgType::error:
-                std::cout << "[ERROR] " << info.m_file->m_path << " <" << info.m_component << "> " << msg << std::endl;
+                std::cout << "[ERROR] " << info.m_file->m_path;
+                positionPrint(line, index);
+                std::cout << " <" << info.m_component << "> " << msg << std::endl;
                 exit(100);
                 break;
             }
@@ -25,17 +38,25 @@ namespace mnet {
             MsgType type, 
             std::string msg, 
             std::string component, 
-            std::string filePath
+            std::string filePath,
+            int line,
+            int index
         ) override {
             switch (type) {
             case mnet::MsgType::info:
-                std::cout << "[INFO] " << filePath << " " << msg << std::endl;
+                std::cout << "[INFO] " << filePath;
+                positionPrint(line, index);
+                std::cout << msg << std::endl;
                 break;
             case mnet::MsgType::warning:
-                std::cout << "[WARNING] " << filePath << " " << msg << std::endl;
+                std::cout << "[WARNING] " << filePath;
+                positionPrint(line, index);
+                std::cout << msg << std::endl;
                 break;
             case mnet::MsgType::error:
-                std::cout << "[ERROR] " << filePath << " <" << component << "> " << msg << std::endl;
+                std::cout << "[ERROR] " << filePath;
+                positionPrint(line, index);
+                std::cout << " <" << component << "> " << msg << std::endl;
                 exit(100);
                 break;
         }

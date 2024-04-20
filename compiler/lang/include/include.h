@@ -7,8 +7,8 @@
 namespace mnet {
     namespace tokenProperties {
         enum CompileMode : bool {
-            MODULE = 0,
-            APPLICATION = 1
+            Module = 0,
+            Application = 1
         };
     }
 
@@ -17,12 +17,6 @@ namespace mnet {
         std::string m_path;
         std::string m_code;
     } file_t;
-
-    struct LineParserCall {
-        size_t m_lineNumber;
-        file_t m_file;
-        std::string m_line;
-    };
 
     struct FileStructure {
         file_t m_file;

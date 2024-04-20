@@ -18,12 +18,14 @@ namespace mnet {
     
     class IDebugger {
     public:
-        virtual void echo(MsgType type, std::string msg, DebugInfo info) = 0;
+        virtual void echo(MsgType type, std::string msg, DebugInfo info, int line, int index) = 0;
         virtual void stEcho(
             MsgType type, 
             std::string msg, 
             std::string component, 
-            std::string filePath
+            std::string filePath,
+            int line = 0,
+            int index = 0
         ) = 0; // st - static echo
     };
 
@@ -36,11 +38,13 @@ namespace mnet {
             std::string msg,
             MsgType type,
             std::string component, 
-            std::string filePath
+            std::string filePath,
+            int line = 0,
+            int index = 0
         ) noexcept;
     protected:
         void setDebugInfo(const DebugInfo info) noexcept;
-        void echo(std::string msg, MsgType type = info) noexcept;
+        void echo(std::string msg, MsgType type = info, int line = 0, int index = 0) noexcept;
     };
 }
 

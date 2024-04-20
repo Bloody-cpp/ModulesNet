@@ -17,11 +17,11 @@ int main(int argc, char **argv)
     mnet::LangParser parser;
     auto filesPath = argsParser.getFilesPaths();
 
-    vector<mnet::FileStructure> structures;
+    vector<shared_ptr<mnet::FileStructure>> structures;
     for (auto path : filesPath) {
         mnet::File file(path);
-        mnet::FileStructure structure = parser.parse(file.convert());
-        cout << structure.m_targetName << endl;
+        auto structure = parser.createStructure(file.convert());
+        cout << structure->m_targetName << endl;
         structures.push_back(std::move(structure));
     }
     return 0;

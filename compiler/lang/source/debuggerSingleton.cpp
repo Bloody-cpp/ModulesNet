@@ -11,15 +11,17 @@ void DebuggerSingleton::setDebugInfo(const DebugInfo info) noexcept {
     m_debugInfo = info;
 }
 
-void DebuggerSingleton::echo(string msg, MsgType type) noexcept {
-    m_debugger->echo(type, msg, m_debugInfo);
+void DebuggerSingleton::echo(string msg, MsgType type, int line, int index) noexcept {
+    m_debugger->echo(type, msg, m_debugInfo, line, index);
 }
 
 void DebuggerSingleton::echo(
     std::string msg,
     MsgType type,
     std::string component, 
-    std::string filePath
+    std::string filePath,
+    int line,
+    int index
 ) noexcept {
-    m_debugger->stEcho(type, msg, component, filePath);
+    m_debugger->stEcho(type, msg, component, filePath, line, index);
 }
