@@ -21,7 +21,11 @@ int main(int argc, char **argv)
     for (auto path : filesPath) {
         mnet::File file(path);
         auto structure = parser.createStructure(file.convert());
-        cout << structure->m_targetName << endl;
+        cout << "Target name: " << structure->m_targetName << endl;
+        cout << "Requires: " << endl;
+        for (auto x : structure->m_requires) {
+            cout << x << endl;
+        }
         structures.push_back(std::move(structure));
     }
     return 0;

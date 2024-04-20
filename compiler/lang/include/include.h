@@ -23,7 +23,7 @@ namespace mnet {
         std::string m_targetName;
         tokenProperties::CompileMode m_mode;
         std::vector<std::string> m_requires;
-        std::vector<std::string> m_mnetIncludes;
+        std::vector<std::string> m_includes;
     };
 }
 

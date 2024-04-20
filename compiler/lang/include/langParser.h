@@ -31,11 +31,14 @@ namespace mnet
         std::shared_ptr<FileStructure> m_structure; //Updates every call createStructure
         std::shared_ptr<parsing::Lines> m_lines;
         std::shared_ptr<parsing::Lines> m_noLiteralsLines;
+        std::shared_ptr<parsing::Lines> m_preprocessingLines;
 
+        std::string getPath(const std::string literal, const size_t lineNumber) noexcept;
+        std::string getString(const std::string literal, const size_t lineNumber) noexcept;
         parsing::LangKeywords getKeyword(const std::string line) noexcept;
         std::vector<std::string> getLiterals(const std::string line) noexcept;
 
-        std::shared_ptr<parsing::Lines> makeLines(std::string& code) noexcept;
+        std::shared_ptr<parsing::Lines> makeLines(std::string& code, const char prefix = '@') noexcept;
 
         void parseCompileTarget() noexcept;       
         void parseRequires() noexcept;
